@@ -64,24 +64,27 @@ void getSuffixExp(const char *ptr)
 		}
 		int stack_in = getPrioroty(top->top());
 		int stack_out = getPrioroty(*ptr);
-		if (stack_in > stack_out)//如果栈里的等级大于栈外，则直接输出
+		if (stack_out == -2)//如果为变量则直接输出
 		{
 			sufixExp += *ptr;
 		}
-		else if (stack_in == stack_out)//如果栈里等级等于栈外，则栈内的符号出栈，栈外的符号入栈
+		else if (stack_in >= stack_out)//如果栈里等级大于等于栈外，则栈内的符号出栈，栈外的符号入栈
 		{
-			if (top->top() != '#')
-			{
-				sufixExp += top -> top();
-				top->pop();
-				top->push(*ptr);
+			while(stack_in >= stack_out)//可能栈内连续多个符号等级大于栈外的符号
+			{ 
+				if (top->top() != '#')
+				{
+					sufixExp += top->top();
+					top->pop();
+				}
+				stack_in = getPrioroty(top->top());
 			}
+			top->push(*ptr);
 		}
 		else//如果栈里的等级小与栈外，则栈外的符号直接入栈
 		{
 			top->push(*ptr);
 		}
-
 		ptr++;
 	}
 	while (!top->empty())
