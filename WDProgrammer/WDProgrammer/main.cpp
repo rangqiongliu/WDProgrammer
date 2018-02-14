@@ -19,5 +19,6 @@ void main()
 	double ptr[] = {-2,-5,-3,-6,-4,-8,-6};
 	cout << getMaxSum(ptr, sizeof(ptr) / sizeof(double)) << endl;
 	*/
-	
+	char * a = "X=A+B*(C-D)/E";
+	getSuffixExp(a);
 }
