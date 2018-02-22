@@ -19,6 +19,11 @@ void main()
 	double ptr[] = {-2,-5,-3,-6,-4,-8,-6};
 	cout << getMaxSum(ptr, sizeof(ptr) / sizeof(double)) << endl;
 	*/
-	char * a = "a+b*(c-d)/e-f";
-	getSuffixExp(a);
+	//char * a = "a+b*(c-d)/e-f";
+	//getSuffixExp(a);
+	
+
+	//测试字符转数字的函数
+	char a[] = "123.4576";
+	str2int(a);
 }

@@ -140,3 +140,47 @@ int getPrioroty(const char c)
 	if (c >= '0'&&c <= '9' || c == '.') return -2;
 	else return 100;
 }
+
+void str2int(const char *ptr)
+{
+	if (NULL == ptr) return;
+	int num = strlen(ptr);//字符串总的个数
+	double sum = 0;//存储最后的转换数值。
+	bool flag = true;//是否含有小数点
+	int num_after_point = 0;//记录小数点后的位数
+	for (int i = 0; i < num; i++)
+	{
+		if (ptr[i] >= '0'&& ptr[i] <= '9' || ptr[i] == '.')
+		{
+			if (ptr[i] == '.')
+			{
+				flag = false;
+				continue;
+			}
+			if (flag)
+			{
+				sum = 10 * sum + (ptr[i] - 48);
+			}
+			else
+			{
+				num_after_point++;
+				sum += double(ptr[i] - 48) / (pow(10, num_after_point));
+			}
+
+		}
+		else
+		{
+			cout << "Please enter right str" << endl;
+			return;
+		}
+	}
+	cout << sum << endl;
+}
+
+
+
+void combineCoin(const int * Coin, const int num_elem/*硬币的种类数*/, int *num_Coin)
+{
+	cout << "Hello" << endl;
+}
+

@@ -1,4 +1,5 @@
 #pragma once
+#define INF 9999999
 #include<iostream>
 #include<typeinfo>
 using namespace std;
@@ -99,3 +100,20 @@ bool judgeInfixExp(const char *ptr);
 时间：2018-2-14
 */
 int getPrioroty(const char c);
+
+
+
+void str2int(const char *ptr);
+/*
+函数功能说明：给定多个面值不同的硬币，各面值的硬币数给出，求能组成Target钱的组合情况
+函数入口：Coin为面值种类，比如{1,2,5,10}，num_elem为面值种类数，num_Coin为每种面值的数量，默认为NULL（即每种面值的数量为无穷大）
+函数出口：无返回值，详细组合情况会在函数当中打印出来
+作者：刘让琼
+时间：2018-2-16
+*/
+struct C_coin
+{
+	int m_value;//面值
+	C_coin * ptr;
+};
+void combineCoin(const int * Coin, const int num_elem/*硬币的种类数*/,  int *num_Coin = NULL);
