@@ -203,3 +203,38 @@ void BubbleSort(int * RawData, const int num_elem)
 	}
 }
 
+void QuickSort(int *RawData, const int start, const int end)
+{
+	if (end <= start || NULL == RawData || start < 0 || end < 0 )
+		return;
+	int key = RawData[start];
+	int former = start;
+	int latter = end;
+	while (former<latter)//快速函数每次调用必须经过end-start次比较
+	{
+		for (; latter > former; latter--)//从后向前找比key值小的数，找到第一个小于key值得元素就与RawData[former]对调
+		{
+			if (RawData[latter] < key)
+			{
+				int temp = RawData[former];
+				RawData[former] = RawData[latter];
+				RawData[latter] = temp;
+				break;
+			}
+		}
+
+		for (; former < latter; former++)//从前向后找比key值要大的数，找到第一个大于key值得元素就与RawData[latter]对调
+		{
+			if (RawData[former] > key)
+			{
+				int temp = RawData[former];
+				RawData[former] = RawData[latter];
+				RawData[latter] = temp;
+				break;
+			}
+		}
+	}
+	RawData[former] = key;
+	QuickSort(RawData, start, former - 1);
+	QuickSort(RawData, former + 1, end);
+}
