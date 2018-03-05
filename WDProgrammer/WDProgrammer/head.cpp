@@ -177,10 +177,29 @@ void str2int(const char *ptr)
 	cout << sum << endl;
 }
 
-
-
-void combineCoin(const int * Coin, const int num_elem/*硬币的种类数*/, int *num_Coin)
+void combineCoin(const int * Coin, const int num_elem/*硬币的种类数*/, const int *num_Coin)
 {
 	cout << "Hello" << endl;
+}
+
+void BubbleSort(int * RawData, const int num_elem)
+{
+	if (NULL == RawData || 0 == num_elem)
+	{
+		cout << "No parameters passed! " << endl;
+		return;
+	}
+	for (int i = 0; i < num_elem - 1; i++)
+	{
+		for (int j = i + 1; j < num_elem; j++)
+		{
+			if (RawData[j] < RawData[i])
+			{
+				int temp = RawData[j];
+				RawData[j] = RawData[i];
+				RawData[i] = temp;
+			}
+		}
+	}
 }
 

@@ -102,7 +102,6 @@ bool judgeInfixExp(const char *ptr);
 int getPrioroty(const char c);
 
 
-
 void str2int(const char *ptr);
 /*
 函数功能说明：给定多个面值不同的硬币，各面值的硬币数给出，求能组成Target钱的组合情况
@@ -116,4 +115,87 @@ struct C_coin
 	int m_value;//面值
 	C_coin * ptr;
 };
-void combineCoin(const int * Coin, const int num_elem/*硬币的种类数*/,  int *num_Coin = NULL);
+void combineCoin(const int * Coin, const int num_elem/*硬币的种类数*/,  const int *num_Coin = NULL);
+
+/*
+函数功能说明：打印一维数组
+函数入口：需要打印的一维数组首地址，需要打印的元素个数
+函数出口：无返回值，详细情况会在函数当中打印出来
+作者：刘让琼
+时间：2018-3-4
+注：传入的元素个数不能超过数组本身的个数，不然会出现错误
+*/
+template<typename T>
+void PrintArray(T * RawData, const int num_elem)
+{
+	if (NULL == RawData || 0 == num_elem)
+	{
+		cout << "PrintArray function no parameters passed!"<<endl;
+		return;
+	}
+	if (typeid(RawData) !=  typeid(int *) && typeid(RawData) !=  typeid(double *) && typeid(RawData) != typeid(float *)) 
+	{
+		cout << "PrintArray function passed wrong parameters!" << endl;
+		return;
+	}
+	for (int i = 0; i < num_elem; i++)
+		cout << RawData[i] << "  ";
+	cout << endl;
+}
+
+/*
+函数功能说明：打印二维数组
+函数入口：需要打印的二维数组首地址，二维数组的行和列
+函数出口：无返回值，详细情况会在函数当中打印出来
+作者：刘让琼
+时间：2018-3-4
+注：传入的行和列必须和二维数组本身的行数和列数一致，不然会出现错误。
+调用方式如下：
+int a[][10] = { {9,8,4,6,5,8,3,2,6,8},{4,2,5,6,9,7,1,5,6,3 } };
+PrintArray(&a[0][0], 2,10);
+*/
+template<typename T>
+void PrintArray(T *RawData, const int row, const int col)
+{
+	if (NULL == RawData || 0 == row || 0 == col)
+	{
+		cout << "PrintArray function no parameters passed!" << endl;
+		return;
+	}
+	if (typeid(RawData) !=  typeid(int *) && typeid(RawData) !=  typeid(double *) && typeid(RawData) !=  typeid(float *))
+	{
+		cout << "PrintArray function passed wrong parameters!" << endl;
+		return;
+	}
+	for (int i = 0; i < row; i++)
+	{
+		for (int j = 0; j < col; j++)
+		{
+			cout << RawData[i*col+j] << "  ";
+		}
+		cout << endl;
+	}
+}
+
+/*
+函数功能说明：冒泡排序
+函数入口：需要排序的一维数组，以及一维数组的元素个数
+函数出口：无返回值，排好序的数组由形参直接带回
+作者：刘让琼
+时间：2018-3-4
+时间复杂度与空间复杂度分析如下：
+【时间复杂度】
+   最差情况下：
+     对于n个元素的一维数组，冒泡排序总共需要进行[(n-1)+(n-2)+(n-3)+...+1]=(n^2-n)/2次比较，即时间复杂度为O(n^2)
+     需要移动元素的次数为3*（n^2-n）/2次。
+   最好情况下：
+     需要进行比较的次数为n-1次。
+	 需要移动的系数为0次。
+   平均时间复杂度：
+     O(n)
+【空间复杂度】
+    因为就在传入的数组当中进行顺序调换，所以空间复杂度为O(n)。
+【稳定性】
+    冒泡排序是一种稳定的排序算法，即排完序后相同的两个元素之间的相对位置是不会发生变化的。
+*/
+void BubbleSort(int * RawData, const int num_elem);
