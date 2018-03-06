@@ -26,7 +26,7 @@ void main()
 	//str2int(a);
 	//≤‚ ‘≈≈–Ú
 	int a[] = { 9,8,4,6,5,8,3,2,6,8,4,2,5,6,9,7,1,5,6,3 };
-	QuickSort(a,  0,sizeof(a) / sizeof(int)-1);
+	InsertSort(a,  sizeof(a) / sizeof(int));
 	PrintArray(a, sizeof(a) / sizeof(int));
 	
 }

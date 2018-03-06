@@ -184,7 +184,7 @@ void combineCoin(const int * Coin, const int num_elem/*硬币的种类数*/, const int
 
 void BubbleSort(int * RawData, const int num_elem)
 {
-	if (NULL == RawData || 0 == num_elem)
+	if (NULL == RawData || 0 >= num_elem)
 	{
 		cout << "No parameters passed! " << endl;
 		return;
@@ -237,4 +237,20 @@ void QuickSort(int *RawData, const int start, const int end)
 	RawData[former] = key;
 	QuickSort(RawData, start, former - 1);
 	QuickSort(RawData, former + 1, end);
+}
+
+void InsertSort(int *RawData, const int ele_num)
+{
+	if (NULL == RawData || ele_num<=0)
+		return;
+	for (int sort_i = 1; sort_i < ele_num; sort_i++)
+	{
+		int temp = RawData[sort_i];
+		int move_i = sort_i - 1;
+		for ( ; move_i >= 0 && temp< RawData[move_i]; move_i--)
+		{
+			RawData[move_i + 1] = RawData[move_i];
+		}
+		RawData[move_i + 1] = temp;
+	}
 }
