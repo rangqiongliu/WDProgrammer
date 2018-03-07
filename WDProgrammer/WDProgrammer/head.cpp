@@ -254,3 +254,25 @@ void InsertSort(int *RawData, const int ele_num)
 		RawData[move_i + 1] = temp;
 	}
 }
+
+void ShellSort(int *RawData, const int ele_num)
+{
+	int Incre = ele_num / 2;//初始增量
+	for (; Incre > 0; Incre /= 2)//逐步改变增量，希尔增量是每次是原来的增量的一半
+	{
+		for (int i = 0; i < Incre; i++)//根据增量分成了几组
+		{
+			for (int sort_i = i+Incre; sort_i < ele_num; sort_i += Incre)//对每组进行直接插入排序
+			{
+				int temp = RawData[sort_i];
+				int move_i = sort_i - Incre;
+				for (; move_i >= 0 && temp < RawData[move_i]; move_i -= Incre)
+				{
+					RawData[move_i + Incre] = RawData[move_i];
+				}
+				RawData[move_i + Incre] = temp;
+			}
+		}
+	}
+
+}

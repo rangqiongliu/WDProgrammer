@@ -25,8 +25,8 @@ void main()
 	//char a[] = "123.4576";
 	//str2int(a);
 	//≤‚ ‘≈≈–Ú
-	int a[] = { 9,8,4,6,5,8,3,2,6,8,4,2,5,6,9,7,1,5,6,3 };
-	InsertSort(a,  sizeof(a) / sizeof(int));
+	int a[] = { 1,2,38,8,8,4,4,4,4,5,6,9,7,2,6,8,10 };
+	ShellSort(a,  sizeof(a) / sizeof(int));
 	PrintArray(a, sizeof(a) / sizeof(int));
 	
 }
