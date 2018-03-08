@@ -257,6 +257,8 @@ void InsertSort(int *RawData, const int ele_num)
 
 void ShellSort(int *RawData, const int ele_num)
 {
+	if (NULL == RawData || 0 >= ele_num)
+		return;
 	int Incre = ele_num / 2;//初始增量
 	for (; Incre > 0; Incre /= 2)//逐步改变增量，希尔增量是每次是原来的增量的一半
 	{
@@ -279,6 +281,8 @@ void ShellSort(int *RawData, const int ele_num)
 
 void ModifyHeap(int *RawData, int No_leaf,const int ele_num)
 {
+	if (NULL == RawData || No_leaf < 0 || ele_num <= 0)
+		return;
 	int lChild = 2 * No_leaf + 1;//左子节点，索引号从0开始。
 	int Child = -1;//需要与父节点想交换的子节点索引号
 	for (; lChild < ele_num; No_leaf = Child,lChild=2*No_leaf+1)//将Child赋值给No_leaf的原因在于只有改变过元素的子树才需要重新调整的必要
@@ -307,6 +311,8 @@ void ModifyHeap(int *RawData, int No_leaf,const int ele_num)
 
 void HeapSort(int *RawData, const int ele_num)
 {
+	if ( NULL == RawData || 0 >= ele_num)
+		return  ;
 	for (int i = ele_num / 2 - 1; i >= 0; i--)//创建初始大顶堆
 	{
 		ModifyHeap(RawData, i, ele_num);
