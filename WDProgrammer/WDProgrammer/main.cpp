@@ -26,7 +26,7 @@ void main()
 	//str2int(a);
 	//≤‚ ‘≈≈–Ú
 	int a[] = { 1,2,38,8,8,4,4,4,4,5,6,9,7,2,6,8,10 };
-	ShellSort(a,  sizeof(a) / sizeof(int));
+	HeapSort(a,  sizeof(a) / sizeof(int));
 	PrintArray(a, sizeof(a) / sizeof(int));
 	
 }

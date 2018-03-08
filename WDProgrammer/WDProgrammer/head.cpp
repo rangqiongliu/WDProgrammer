@@ -276,3 +276,47 @@ void ShellSort(int *RawData, const int ele_num)
 	}
 
 }
+
+void ModifyHeap(int *RawData, int No_leaf,const int ele_num)
+{
+	int lChild = 2 * No_leaf + 1;//左子节点，索引号从0开始。
+	int Child = -1;//需要与父节点想交换的子节点索引号
+	for (; lChild < ele_num; No_leaf = Child,lChild=2*No_leaf+1)//将Child赋值给No_leaf的原因在于只有改变过元素的子树才需要重新调整的必要
+	{
+		
+		if (lChild + 1 < ele_num && RawData[lChild] < RawData[lChild + 1])//确定是左子节点还是右子节点与父节点进行比较并交换元素
+		{
+			Child = lChild + 1;
+		}
+		else
+		{
+			Child = lChild;
+		}
+
+		if (RawData[Child] > RawData[No_leaf])//如果子节点比父节点大，则交换元素
+		{
+			int temp = RawData[No_leaf];
+ 			RawData[No_leaf] = RawData[Child];
+			RawData[Child] = temp;
+			
+		}
+		else
+			break;//如果没有发生数值的交换则直接跳出循环，证明该子树已经符合大堆的性质
+	}
+}
+
+void HeapSort(int *RawData, const int ele_num)
+{
+	for (int i = ele_num / 2 - 1; i >= 0; i--)//创建初始大顶堆
+	{
+		ModifyHeap(RawData, i, ele_num);
+	}
+
+	for (int i = ele_num - 1; i >= 0; i--)
+	{
+		int temp = RawData[i];
+		RawData[i] = RawData[0];
+		RawData[0] = temp;
+		ModifyHeap(RawData, 0, i );
+	}
+}
