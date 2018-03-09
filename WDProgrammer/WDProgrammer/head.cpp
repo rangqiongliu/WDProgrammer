@@ -385,3 +385,22 @@ void Merge(int *RawData, int low, int mid, int high)
 	delete[] tempData;
 }
 
+void StraightSort(int *RawData, int ele_num)
+{
+	if (NULL == RawData || ele_num <= 0) return;
+	int minmum = -1;
+	for (int i = 0; i < ele_num - 1; i++)
+	{
+		minmum = i;
+		for (int j = i+1; j < ele_num; j++)
+		{
+			if (RawData[j] < RawData[minmum])
+			{
+				minmum = j;
+			}
+		}
+		int temp = RawData[minmum];
+		RawData[minmum] = RawData[i];
+		RawData[i] = temp;
+	}
+}

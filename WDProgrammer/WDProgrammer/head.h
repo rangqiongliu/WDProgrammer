@@ -1,5 +1,6 @@
 #pragma once
 #define INF 9999999
+
 #include<iostream>
 #include<typeinfo>
 #include<bitset>
@@ -342,7 +343,7 @@ void BitmapSort(int *RawData, const int ele_num);
 
 /*
 函数功能说明：归并排序
-函数入口：需要排序的一维数组，以及数组的元素个数
+函数入口：需要排序的一维数组，数组的最低索引（从0开始），数组的最高索引
 函数出口：无返回值，排好序的数组由形参直接带回
 作者：刘让琼
 时间：2018-3-9
@@ -365,3 +366,29 @@ void BitmapSort(int *RawData, const int ele_num);
 */
 void MergeSort(int *RawData, int low, int high);
 void Merge(int *RawData, int low, int mid, int high);
+
+/*
+函数功能说明：直接排序
+函数入口：需要排序的一维数组，数组元素的个数
+函数出口：无返回值，排好序的数组由形参直接带回
+作者：刘让琼
+时间：2018-3-9
+时间复杂度与空间复杂度分析如下：
+【时间复杂度】
+最差的情况下：
+	第一次比较n-1次，
+	第二次比较n-2次，
+	第三次比较n-3次，
+	第n-1次比较1次，
+	所以：S=（n-1）+（n-2）+（n-3）+...+1=(n^2-n)/2
+	时间复杂度为O(n^2)
+最好情况下：
+	O(n^2)
+平均情况下：
+	O(n^2)
+【空间复杂度】
+	两个元素需要交换的时候需要一个临时变量，所以空间复杂度为O(1)
+【稳定性】
+	直接排序是一种不稳定的排序算法，即排完序后相同的两个元素之间的相对位置不会发生变化。
+*/
+void StraightSort(int *RawData, int ele_num);
