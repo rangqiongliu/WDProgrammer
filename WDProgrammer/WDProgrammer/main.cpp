@@ -25,8 +25,8 @@ void main()
 	//char a[] = "123.4576";
 	//str2int(a);
 	//≤‚ ‘≈≈–Ú
-	int a[] = { 1,2,38,8,8,4,4,4,4,5,6,9,7,2,6,8,10 };
-	HeapSort(a,  sizeof(a) / sizeof(int));
+	int a[] = {1,5,6,8,9,7,4,5,6,1,2,3,5,6,8,7,45,6,879,45,415,8,8};
+	MergeSort(a, 0, sizeof(a) / sizeof(int)-1);
 	PrintArray(a, sizeof(a) / sizeof(int));
 	
 }

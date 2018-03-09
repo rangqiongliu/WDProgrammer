@@ -326,3 +326,62 @@ void HeapSort(int *RawData, const int ele_num)
 		ModifyHeap(RawData, 0, i );
 	}
 }
+
+void BitmapSort(int *RawData,  const int ele_num)
+{
+	bitset<100> sort;
+	for (int i = 0; i < ele_num; i++)
+	{
+		sort[RawData[i]] = 1;
+	}
+	int record = 0;
+	for (int i = 0;i < 100; i++)
+	{
+		if (record >= ele_num) return;
+		if (sort[i] == 1)
+		{
+			RawData[record] = i;
+			record++;
+		}
+	}
+}
+
+void MergeSort(int *RawData, int low, int high)
+{
+	
+	if (RawData != NULL  && low < high)
+	{
+		int mid = (high+low) / 2;
+		MergeSort(RawData, low, mid);
+		MergeSort(RawData, mid + 1, high);
+		Merge(RawData, low, mid, high);
+
+	}//if end
+
+}
+
+void Merge(int *RawData, int low, int mid, int high)
+{
+	if (NULL == RawData || low < 0 || mid<0 || low>high) return;
+	int * tempData = new int[high - low +1];
+	for (int i = low; i <= high; i++)
+	{
+		tempData[i - low] = RawData[i];
+	}
+	int i=-1, j=-1, k=-1;
+	for ( i = 0, j = mid + 1 -low, k = i+low; i+low <= mid && j +low<= high; k++)
+	{
+		if (tempData[i] <= tempData[j])
+		{
+			RawData[k] = tempData[i++];
+		}
+		else
+			RawData[k] = tempData[j++];
+		
+	}//此循环之后，可能会存在某一侧的数据没有复制到RawData数组中。因此还需要下面两个循环进行判断，来把剩下的有序元素放进RawData中，两个循环每次只会运行其中的一个。
+
+	while (i <= mid-low) RawData[k++] = tempData[i++];
+	while (j <= high-low)	RawData[k++] = tempData[j++];
+	delete[] tempData;
+}
+

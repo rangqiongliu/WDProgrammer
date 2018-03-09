@@ -2,6 +2,7 @@
 #define INF 9999999
 #include<iostream>
 #include<typeinfo>
+#include<bitset>
 using namespace std;
 /*
 函数功能说明：计算两个字符串的公共子序列的长度
@@ -327,6 +328,40 @@ void ModifyHeap(int *RawData, int No_leaf, const int ele_num);
 【空间复杂度】
 	因为就在传入的数组当中进行顺序调换，只需要一个临时的存储变量，所以空间复杂度为O(1)。
 【稳定性】
-	希尔排序是一种不稳定的排序算法，即排完序后相同的两个元素之间的相对位置会发生变化。
+	堆排序是一种不稳定的排序算法，即排完序后相同的两个元素之间的相对位置会发生变化。
 */
 void HeapSort(int *RawData, const int ele_num);
+
+/*
+函数功能：位图排序
+日期：2018-03-08
+说明：这个函数值简单的实现了位图排序的基本原理，最大输入100以内，不能有重复的数据。
+*/
+void BitmapSort(int *RawData, const int ele_num);
+
+
+/*
+函数功能说明：归并排序
+函数入口：需要排序的一维数组，以及数组的元素个数
+函数出口：无返回值，排好序的数组由形参直接带回
+作者：刘让琼
+时间：2018-3-9
+时间复杂度与空间复杂度分析如下：
+【时间复杂度】
+最差情况下：
+	最初始分组，即每组一个元素，总共对比次数为1*n/2次
+	第二次：即每组两个元素，总共组多需要对比2*n/4次
+	第三次，即每组四个元素，总共最多需要对比4*n/8次
+	第x次全部合并完，即每组有2^x个元素，总共做多需要对比2^（x-1）*n/(2^x)次
+	所以总共需要的时间复杂度为O(nlogn)
+最好情况下：
+	O(nlogn)
+平均情况下：
+	O(nlogn)
+【空间复杂度】
+	因为每次在Merge的时候需要用到一个大小为high-low+1的数组来存储临时值，其high-low+1的最大值就是最后一次大的合并，大小为n，所以空间复杂度为O(n)。
+【稳定性】
+	归并排序是一种不稳定的排序算法，即排完序后相同的两个元素之间的相对位置不会发生变化。
+*/
+void MergeSort(int *RawData, int low, int high);
+void Merge(int *RawData, int low, int mid, int high);
