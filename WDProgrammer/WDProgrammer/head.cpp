@@ -238,6 +238,41 @@ void QuickSort(int *RawData, const int start, const int end)
 	QuickSort(RawData, start, former - 1);
 	QuickSort(RawData, former + 1, end);
 }
+void QuickSort(vector<int> &myVector, const int start, const int end)
+{
+	if (myVector.size() == 0 || start<0 || start>=end) return;
+	int key = myVector[start];
+	int former = start;
+	int latter = end;
+	while (former<latter)
+	{
+		for (; former < latter ; latter--)
+		{
+			if (myVector[latter] < key)
+			{
+				int temp = myVector[latter];
+				myVector[latter] = myVector[former];
+				myVector[former] = temp;
+				break;
+			}
+		}
+
+		for (; former < latter; former++)
+		{
+			if (myVector[former] > key)
+			{
+				int temp = myVector[latter];
+				myVector[latter] = myVector[former];
+				myVector[former] = temp;
+				break;
+			}
+			
+		}
+	}
+	myVector[former] = key;
+	QuickSort(myVector, start, former - 1);
+	QuickSort(myVector, former + 1, end);
+}
 
 void InsertSort(int *RawData, const int ele_num)
 {
@@ -403,4 +438,40 @@ void StraightSort(int *RawData, int ele_num)
 		RawData[minmum] = RawData[i];
 		RawData[i] = temp;
 	}
+}
+
+void BucketSort(vector<int> &myVector)
+{
+	if (myVector.size() == 0) return;
+	auto max_iter = max_element(myVector.begin(), myVector.end());
+	int max_value = *max_iter;
+	int ele_num = myVector.size();
+	int group = max_value / 10 + 1;//需要桶的个数
+	vector<int> *SortVector = new vector<int>[group];
+	int index = -1;
+	for (int i = 0; i < ele_num; i++)
+	{
+		index = myVector[i] / 10;//将待排序的数据按10为间隔划分区间，比如0-9的元素全放到第0个桶，10-19的元素全放到第1个桶
+		SortVector[index].push_back(myVector[i]);
+	}
+
+	//对每个桶中的数据进行排序
+	for (int i = 0; i < group; i++)
+	{
+		if (SortVector[i].size() > 1)
+		{
+			QuickSort(SortVector[i], 0, SortVector[i].size() - 1);
+		}
+	}
+
+	//将排好序的桶中的元素重新--复制到myVector中，由其带回
+	int record = 0;
+	for (int i = 0; i < group; i++)
+	{
+		for (int j = 0; j < SortVector[i].size(); j++)
+		{
+			myVector[record++] = SortVector[i][j];
+		}
+	}
+	delete[] SortVector;
 }

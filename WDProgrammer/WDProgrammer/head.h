@@ -4,6 +4,8 @@
 #include<iostream>
 #include<typeinfo>
 #include<bitset>
+#include<vector>
+#include<algorithm>
 using namespace std;
 /*
 函数功能说明：计算两个字符串的公共子序列的长度
@@ -232,7 +234,7 @@ void BubbleSort(int *RawData, const int num_elem);
   快速排序是一种不稳定的排序算法，即排完序后相同的两个元素之间的相对位置会发生变化。
 */
 void QuickSort(int *RawData, const int start, const int end);
-
+void QuickSort(vector<int> &myVector, const int start, const int end);
 /*
 函数功能说明：插入排序
 函数入口：需要排序的一维数组，以及数组的元素个数
@@ -392,3 +394,31 @@ void Merge(int *RawData, int low, int mid, int high);
 	直接排序是一种不稳定的排序算法，即排完序后相同的两个元素之间的相对位置不会发生变化。
 */
 void StraightSort(int *RawData, int ele_num);
+
+/*
+函数功能说明：桶排序
+函数入口：需要排序的vector，这里选用vector，纯粹为是了调用方便使用库函数max_element，懒得去写查找数组里的最大值函数了。
+函数出口：无返回值，排好序的数组由形参直接带回
+作者：刘让琼
+时间：2018-3-9
+时间复杂度与空间复杂度分析如下：
+【时间复杂度】
+最差的情况下：
+	将所有待排序的N元素分别配到M个桶中，时间复杂度为O(N)
+
+	对每个桶中的数列（假如每个桶中的元素为N/M个）进行排序（最快的时间复杂度为O(NlogN)），
+
+	所以桶排序总的复杂度为：O(N)+O(M*N/Mlog(N/M))==>O(N+NlogN/M)
+
+最好情况下：
+	当M=N时，时间复杂度为O(N)
+平均情况下：
+	O(N+NlogN/M)
+【空间复杂度】
+	空间主要与桶的个数有关，所以空间复杂度为O(M)
+【稳定性】
+	桶排序的稳定性依赖于桶内元素排序时所使用的排序算法
+
+备注：该算法只是简单的实现了桶排序的一个基本原理，其中对待排序元素分桶时使用的是x/10,x为待排序元素。x/10得到的数就是分配到桶的索引号。
+*/
+void BucketSort(vector<int> &myVector);

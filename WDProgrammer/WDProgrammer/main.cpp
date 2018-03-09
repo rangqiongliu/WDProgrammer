@@ -25,8 +25,13 @@ void main()
 	//char a[] = "123.4576";
 	//str2int(a);
 	//测试排序
-	int a[] = {1,5,6,8,9,7,4,5,6,1,2,3,5,6,8,7,45,6,879,45,415,8,8};
-	StraightSort(a,  sizeof(a) / sizeof(int));
-	PrintArray(a, sizeof(a) / sizeof(int));
+	//int a[] = {9,8,7,6,5,4,3,2,12,23,34,45,56,67,78,89,93,100,110,120,150,197,200,160,179,189};
+
+	//以下是对桶排序的测试
+	vector<int> myVector= { 9,8,7,6,5,4,3,2,12,23,34,45,56,67,78,89,93,100,110,120,150,197,200,160,179,189 };
+	QuickSort(myVector, 0, myVector.size()-1);
+	for (int i = 0; i < myVector.size(); i++)
+		cout << myVector[i] << " ";
+	cout << endl;
 	
 }
