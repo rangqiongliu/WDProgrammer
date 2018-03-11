@@ -475,3 +475,42 @@ void BucketSort(vector<int> &myVector)
 	}
 	delete[] SortVector;
 }
+
+int getNum(int value, int order)//获取value的第order个数，从个位向高位数
+{
+	value /= pow(10, order - 1);
+	return value % 10;
+}
+
+void RadixSort(vector<int> &RawData)
+{
+	if (RawData.size() <= 1) return;
+	auto max_iter = max_element(RawData.begin(), RawData.end());
+	int max_value = *max_iter;
+	int temp = max_value;
+	int count = 0;
+	vector<int> myVector[10];
+	while (temp != 0)//获取最大值得位数
+	{
+		count++;
+		temp /= 10;
+	}
+	for (int i = 1; i <= count; i++)
+	{
+		for (int j = 0; j < RawData.size(); j++)
+		{
+			myVector[getNum(RawData[j], i)].push_back(RawData[j]);
+		}
+
+		for (int temp_i = 0 ,k=0; temp_i < 10; temp_i++)
+		{
+			for (int temp_j = 0; temp_j < myVector[temp_i].size(); temp_j++)
+			{
+				RawData[k++] = myVector[temp_i][temp_j];
+			}
+			myVector[temp_i].clear();
+		}
+
+	}
+
+}

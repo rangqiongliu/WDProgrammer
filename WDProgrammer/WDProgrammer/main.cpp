@@ -29,7 +29,7 @@ void main()
 
 	//以下是对桶排序的测试
 	vector<int> myVector= { 9,8,7,6,5,4,3,2,12,23,34,45,56,67,78,89,93,100,110,120,150,197,200,160,179,189 };
-	QuickSort(myVector, 0, myVector.size()-1);
+	RadixSort(myVector);
 	for (int i = 0; i < myVector.size(); i++)
 		cout << myVector[i] << " ";
 	cout << endl;
