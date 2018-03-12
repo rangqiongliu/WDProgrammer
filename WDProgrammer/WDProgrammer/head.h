@@ -456,15 +456,27 @@ int getNum(int value, int order);
 */
 void RadixSort(vector<int> &RawData);
 
+/*
+函数功能：在一个已经按升序排序的整型数组中查找某一个数
+函数入口：RawData：需要查找的数组源，ele_num：数组包含的元素个数，value：需要被查找的值
+函数出口：如果value存在于RawData中，则返回value在RawData中的索引号，如果不存在则返回-1
+日期：2018-03-12
+作者：刘让琼
+时间复杂度：O(logn）
+
+*/
 int Binary_Search(int *RawData, const int ele_num, const int value);
 
 
 //以下代码为构建Trie树，只实现对字符串(a-z)的插入和查找。
+//Trie数多用于大量数据的统计和查询，还有查询某个字符串是否是另一个字符串的前缀。
+//优点：最大减少无谓的字符串比较
+//缺点：当字符串集合中公共前缀较少时，会大量消耗内存空间
 struct Trie_Node
 {
 	bool isStr;
 	Trie_Node * Child[26];//每个节点有26个子节点
-	string sth;
+	string sth;//这个变量也可以记录统计每个单词出现的频率
 	Trie_Node() : isStr(false) { memset(Child, NULL, sizeof(Child)); }
 };
 
@@ -473,9 +485,30 @@ class Trie
 public: 
 	Trie() { root = new Trie_Node(); }
 	~Trie() { delete root; }
+	//构建前缀树
 	void Insert(const char *word);
-	bool Check(const char *word);
+	//如果不存在字符串，则返回0，如果存在则返回1，如果只是某个字符串的前缀则返回2
+	int Check(const char *word);
+
 	void delete_Trie(Trie_Node *Tree);
+	//构建后缀树
+	void InsertSufixTrie(const char *word);
+	//判断sour是否为des的子串，sour为待查询的字符串，des为目标字符串；如果des不存在Trie中，则默认会添加进Trie中。
+	bool isSubstr(const char *sour, const char *des);
+	//统计sour在des中重复的次数。sour为子串，des为目标字符串。如果des不存在Trie中，则默认会添加进Trie中。
+	int  repeatNum(const char *sour, const char *des);
+	/*统计从某个节点开始的子树中，含终止符的个数*/
+	int getStrNum(Trie_Node * root);
 private:
 	Trie_Node * root;
-};
+};////以上代码为构建Trie树(前缀或者后缀)，实现对字符串（a-z）的插入和查找
+
+/*
+函数功能：将一个字符串中多余的空格删除掉，即字符串的第一个字符和最后一个字符为空格的话，会被删掉，中间如果连续出现两个及两个以上的空格只会保留一个
+函数入口：一个指向字符串的指针
+函数出口：最后的处理结果直接打印在屏幕上
+日期：2018-03-12
+作者：刘让琼
+时间复杂度：O(n)
+*/
+void compressSpace(char *myChar);

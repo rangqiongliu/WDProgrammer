@@ -34,12 +34,12 @@ void main()
 	//以下是对二分查找的测试
 	//int a[] = {1,2,3,4,5,6,7,8,9,10,15,16};
 	//cout << Binary_Search(a, sizeof(a) / sizeof(int), 8) << endl;
-
+	//
 	Trie a;
-	char *str_pt[] = {"liuzhenfang","liurangqiong","hanwangxin"};
-	for (int i = 0; i < 3; i++)
-	{
-		a.Insert(str_pt[i]);
-	}
-	cout << a.Check("hanwangxi") << endl;
+	cout<<a.repeatNum("ana", "anananananana")<<endl;
+
+	//测试压缩多余空格函数
+	//char *p = " liuzhenfang    liurangqiong hanwangxin            dengyang ";
+	//compressSpace(p);
+	
 }

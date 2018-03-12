@@ -540,6 +540,7 @@ int Binary_Search(int *RawData, const int ele_num, const int value)
 
 void Trie :: Insert(const char *word)
 {
+	if (word == NULL) return;
 	const char *pt = word;
 	Trie_Node *Location = root;
 	while (*pt)
@@ -561,7 +562,7 @@ void Trie :: Insert(const char *word)
 	Location->sth = word;
 }
 
-bool Trie::Check(const char *word)
+int Trie::Check(const char *word)
 {
 	Trie_Node *Location = root;
 	while (*word)
@@ -569,7 +570,7 @@ bool Trie::Check(const char *word)
 		if (Location->Child[*word - 'a'] == NULL)
 		{
 			cout << "Trie树中，没有该字符串" << endl;
-			return false;
+			return 0;
 		}
 		else
 		{
@@ -577,12 +578,12 @@ bool Trie::Check(const char *word)
 			word++;
 		}
 	}
-	if (Location->isStr) return true;
+	if (Location->isStr) return 1;
 	else
 	{
 		//如果运行到了这，证明要查找的字符串是某一个字符串的前缀
 		cout << "Trie树中，该字符串是某一字符串的前缀，但磁盘中并未存储该字符串" << endl;
-		return false;
+		return 2;
 	}
 	
 }
@@ -598,3 +599,109 @@ void Trie::delete_Trie(Trie_Node *Tree)
 	}
 	delete Tree;
 }
+
+void Trie::InsertSufixTrie(const char *word)
+{
+	if (word == NULL) return;
+	const char *pt = NULL;
+	while (*word)
+	{
+		pt = word;
+		Insert(pt);
+		word++;
+	}
+}
+
+bool Trie::isSubstr(const char *sour, const char *des)
+{
+	if (NULL == sour || NULL == des) return false;
+	if (Check(des))
+	{
+		if (Check(sour))
+		{
+			cout << sour << "是" << des << "的子串" << endl;
+			return true;
+		}
+		else
+		{
+			cout << sour << "不是" << des << "的子串" << endl;
+			return false;
+		}
+	}
+	else
+	{
+		InsertSufixTrie(des);
+		return isSubstr(sour, des);
+	}
+}
+
+int Trie::getStrNum(Trie_Node * root)
+{
+	int count = 0;
+	if (root != NULL)
+	{
+		if (root->isStr) count++;
+		for (int i = 0; i < 26; i++)
+		{
+			count += getStrNum(root->Child[i]);
+		}
+	}
+	return count;
+}
+
+int  Trie::repeatNum(const char *sour, const char *des)
+{
+	if (NULL == sour || NULL == des) return 0;
+	int count = 0;
+	if (Check(des))
+	{
+		Trie_Node *Location = root;
+		while (*sour)
+		{
+			if (Location->Child[*sour - 'a'] == NULL) return 0;
+			else
+			{
+				Location = Location->Child[*sour - 'a'];
+				sour++;
+			}
+		}
+		return getStrNum(Location);
+	}
+	else
+	{
+		InsertSufixTrie(des);
+		return repeatNum(sour, des);
+	}
+}
+
+void compressSpace(char *myChar)
+{
+	if (NULL == myChar)	return;
+	int ele_num = strlen(myChar);
+	bool *flag = new bool[ele_num] {false};//多余的空格记为true
+	if ( myChar[0] == ' ')//如果字符串的一个为空格，也要去掉
+	{
+		flag[0] = true;
+	}
+
+	for (int i = 1; i < ele_num; i++)
+	{
+		if (myChar[i - 1]==' ' && myChar[i] == ' ')
+			flag[i] = true;
+	}
+
+	if (myChar[ele_num - 1] == ' ') flag[ele_num - 1] = true;//如果字符串的最后一个字符为空格，则也要去掉
+
+	for (int i = 0; i < ele_num; i++)
+	{
+		if (!flag[i])
+		{
+			cout << myChar[i];
+		}
+	}
+
+	cout << endl;
+	delete[] flag;
+}
+
+
