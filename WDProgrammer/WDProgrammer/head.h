@@ -455,3 +455,27 @@ int getNum(int value, int order);
 备注：该算法只是简单的实现了基数排序的一个基本原理。可以说基数排序是桶排序的一种特殊情况。
 */
 void RadixSort(vector<int> &RawData);
+
+int Binary_Search(int *RawData, const int ele_num, const int value);
+
+
+//以下代码为构建Trie树，只实现对字符串(a-z)的插入和查找。
+struct Trie_Node
+{
+	bool isStr;
+	Trie_Node * Child[26];//每个节点有26个子节点
+	string sth;
+	Trie_Node() : isStr(false) { memset(Child, NULL, sizeof(Child)); }
+};
+
+class Trie
+{
+public: 
+	Trie() { root = new Trie_Node(); }
+	~Trie() { delete root; }
+	void Insert(const char *word);
+	bool Check(const char *word);
+	void delete_Trie(Trie_Node *Tree);
+private:
+	Trie_Node * root;
+};

@@ -514,3 +514,87 @@ void RadixSort(vector<int> &RawData)
 	}
 
 }
+
+int Binary_Search(int *RawData, const int ele_num, const int value)
+{
+	if (NULL == RawData || ele_num <= 0) return -1;
+	int start = 0;
+	int end = ele_num-1;
+	while (start <= end)
+	{
+		int mid = (start + end) / 2;
+		if (RawData[mid] == value) return mid;
+		if (RawData[mid] > value)
+		{
+			end = mid - 1;
+			continue;
+		}
+		else
+		{
+			start = mid + 1;
+			continue;
+		}
+	}
+	return -1;
+}
+
+void Trie :: Insert(const char *word)
+{
+	const char *pt = word;
+	Trie_Node *Location = root;
+	while (*pt)
+	{
+		if (Location->Child[*pt - 'a'] == NULL)//如果子节点为空，则新增一个节点
+		{
+			Trie_Node * temp = new Trie_Node();
+			Location->Child[*pt - 'a'] = temp;
+			Location = Location->Child[*pt - 'a'];
+			pt++;
+		}
+		else
+		{
+			Location = Location->Child[*pt - 'a'];
+			pt++;
+		}
+	}
+	Location->isStr = true;
+	Location->sth = word;
+}
+
+bool Trie::Check(const char *word)
+{
+	Trie_Node *Location = root;
+	while (*word)
+	{
+		if (Location->Child[*word - 'a'] == NULL)
+		{
+			cout << "Trie树中，没有该字符串" << endl;
+			return false;
+		}
+		else
+		{
+			Location=Location->Child[*word - 'a'];
+			word++;
+		}
+	}
+	if (Location->isStr) return true;
+	else
+	{
+		//如果运行到了这，证明要查找的字符串是某一个字符串的前缀
+		cout << "Trie树中，该字符串是某一字符串的前缀，但磁盘中并未存储该字符串" << endl;
+		return false;
+	}
+	
+}
+
+void Trie::delete_Trie(Trie_Node *Tree)
+{
+	for (int i = 0; i < 26; i++)
+	{
+		if (Tree->Child[i] != NULL)
+		{
+			delete_Trie(Tree->Child[i]);
+		}
+	}
+	delete Tree;
+}
