@@ -1,11 +1,14 @@
 #pragma once
-#define INF 9999999
+#define INF 99999999
 
 #include<iostream>
 #include<typeinfo>
 #include<bitset>
 #include<vector>
 #include<algorithm>
+#include<time.h>
+#include<fstream>
+#include<Windows.h>
 using namespace std;
 /*
 函数功能说明：计算两个字符串的公共子序列的长度
@@ -512,3 +515,34 @@ private:
 时间复杂度：O(n)
 */
 void compressSpace(char *myChar);
+
+/*
+函数功能：生成大量的整型、16字节字符串、IP地址
+函数入口：kind为1时，生成整型数据（范围0-100000000），为2时：生成16字节字符串（a-z），为3时：生成IP地址；num：需要生成的个数；percent：允许本函数使用当前可用内存的百分比；file_name：保存的文件名。
+函数出口：无返回值，生成的数据全部存入txt文件中。
+日期：2018-03-13
+作者：刘让琼
+备注：函数内部会根据当前系统可用内存来进行分批将数据写入内存，本函数最多占用系统当前可用内存的10%。
+
+*/
+void generateBigData(const int kind, const int num, float percent,string file_name);
+
+/*
+函数功能：辅助创建最小堆，从第0个父节点一直访问到最后一个父节点就能创建最小堆
+函数入口：RawData为数组，No_leaf为父节点索引，k为数组的元素个数；利用循环调用该函数
+函数出口：由RawData数组带回
+日期：2018-03-13
+作者：刘让琼
+备注：该函数只能辅助完成建立小顶堆，如果要建立小顶堆，则从第一个父节点到最后一个父节点循环调用该函数就行。
+*/
+void creatSmallHeap(int *RawData, int No_leaf,const int k);
+
+/*
+函数功能：从海量数据中，找出最大的K个数
+函数入口：file_name:数据存放文件;k:需要找出最大数的个数
+函数出口：最终的K个数直接打印在屏幕上
+日期：2018-03-13
+作者：刘让琼
+备注：为防止本函数过度占用内存，每次只会从海量数据中读取可用内存空间的10%进入到程序。
+*/
+void TopK_Heap(string file_name, const int k);

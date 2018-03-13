@@ -2,6 +2,7 @@
 #include<algorithm>
 #include<stack>
 #include<string>
+
 int LCS_LENTH(const char *ptr1, const char *ptr2)
 {
 	if (NULL == ptr1 || NULL == ptr2) return 0;
@@ -704,4 +705,203 @@ void compressSpace(char *myChar)
 	delete[] flag;
 }
 
+void generateBigData(const int kind, const int num, float percent,string file_name)
+{
+	srand(time(0));
+	unsigned long long  Avai_memory = 0;
+	MEMORYSTATUSEX statex;
+	statex.dwLength = sizeof(statex);
+	GlobalMemoryStatusEx(&statex);
+	Avai_memory = statex.ullAvailPhys;
+	int Threhold = 0;
+	int total_count = 0;
+	int temp_count = 0;
+	ofstream ot(file_name);
 
+	switch (kind)
+	{
+	case 1:
+		Threhold = (Avai_memory*percent) / sizeof(int);
+		break;
+	default:
+		Threhold = (Avai_memory*percent) / sizeof(string);
+		break;
+	}
+
+	Threhold = min(Threhold, num);
+
+	switch (kind)
+	{
+		case 1://生成整型数据
+			{
+				int *data = new int[Threhold];
+				for (total_count = 0, temp_count = 0; total_count <= num; total_count++)
+				{
+					if (temp_count >= Threhold || total_count == num)
+					{
+						for (int i = 0; i < temp_count; i++)
+						{
+							ot << data[i]<<endl;
+						}
+						temp_count = 0;
+					}
+					data[temp_count++] = rand() % 1000000001;//生成0-100000000范围内的数据
+					if (total_count % 10000 == 0)
+					{
+						cout << "已经生成" << total_count << "个数据" << endl;
+					}
+				}
+				ot.close(); 
+				delete[] data;
+			}
+			break;
+
+		case 2: //生成16个字节的字符串
+			{
+				string  * data = new string[Threhold];
+				for (total_count = 0, temp_count = 0; total_count <= num; total_count++)
+				{
+					if (temp_count >= Threhold || total_count == num)
+					{
+						for (int i = 0; i < temp_count; i++)
+						{
+							ot << data[i] << endl;
+						}
+						temp_count = 0;
+					}
+					data[temp_count].clear();
+					for (int i = 0; i < 16; i++)
+					{
+						data[temp_count] += char( 'a' + rand() % ('z' + 1-'a'));
+					}
+					temp_count++;
+				}
+				ot.clear();
+				delete[] data;
+			}
+			break;
+
+		case 3: //生成IP地址
+			{
+				string  * data = new string[Threhold];
+				for (total_count = 0, temp_count = 0; total_count <= num; total_count++)
+				{
+					if (temp_count >= Threhold || total_count == num)
+					{
+						for (int i = 0; i < temp_count; i++)
+						{
+							ot << data[i] << endl;
+						}
+						temp_count = 0;
+					}
+					data[temp_count].clear();
+					for (int i = 0; i < 4; i++)
+					{
+						data[temp_count] += to_string(rand()%256);
+						if (i < 3)
+						{
+							data[temp_count] += '.';
+						}
+					}
+					temp_count++;
+				}
+				ot.close();
+				delete[] data;
+			}
+			break;
+
+	default:
+		break;
+	}
+	std::cout << "数据生成完成" << endl;
+}
+
+void creatSmallHeap(int *RawData, int No_leaf, const int k)
+{
+	if (NULL == RawData || No_leaf<0 || No_leaf > k / 2 - 1)
+	{
+		cout << "初始数据输入错误，建堆失败" << endl;
+		return;
+	}
+
+	int lChild = No_leaf * 2 + 1;//左子节点
+	int Child = -1;
+	for(; lChild < k && No_leaf>=0; No_leaf = (No_leaf+1)/2-1)
+	{
+		if (lChild + 1 >= k || RawData[lChild] <= RawData[lChild + 1])
+		{
+			Child = lChild;
+		}
+		else
+		{
+			Child = lChild + 1;
+		}
+
+		if (RawData[Child] < RawData[No_leaf])
+		{
+			int temp = RawData[No_leaf];
+			RawData[No_leaf] = RawData[Child];
+			RawData[Child] = temp; 
+		}
+		else
+			break;
+
+	}
+}
+
+void TopK_Heap(string file_name, const int k)
+{
+	
+	ifstream in(file_name);
+	if (!in.is_open() || k <= 0)
+	{
+		cout << "读取数据文件失败" << endl;
+		return;
+	}
+	int *result = new int[k] ;
+	for (int i = 0; i < k; i++)
+	{
+		result[i] = -INF;
+	}
+	for (int i = 0; i <= k / 2-1; i++)//建立初始最小堆
+	{
+		creatSmallHeap(result, i, k);
+	}
+	//计算本函数可占用的内存空间大小
+	MEMORYSTATUSEX statex;
+	statex.dwLength = sizeof(statex);
+	GlobalMemoryStatusEx(&statex);
+	unsigned long long Avai_Memory = statex.ullAvailPhys;
+	int Threhold = Avai_Memory*0.1 / sizeof(int);
+	//
+
+	int count = 0;
+	int *temp_data = new int[Threhold];
+	while (!in.eof())
+	{
+		for (int i = 0; i < Threhold && !in.eof(); i++)//每次读取空间内存10%大小的数据进来，争取减少与磁盘的IO次数，从而节省程序运行的时间。
+		{
+			in >> temp_data[count++];
+		}
+
+		count = min(Threhold, count);
+		for (int i = 0; i < count; i++)
+		{
+			if (result[0] < temp_data[i])
+			{
+				result[0] = temp_data[i];
+				for(int j=0;j<=k/2-1;j++)
+					creatSmallHeap(result, j, k);
+			}
+		}
+	}
+	delete[] temp_data;
+	in.close();
+	QuickSort(result, 0, k - 1);//因为最终获得的最小堆是无序的，所以可以利用快排或者堆排再重新排序，就能获得最大的K个数。
+	for (int i = 0; i < k; i++)
+	{
+		if (result[i] != -INF)
+			cout << result[i] << "  ";
+	}
+	cout << endl;
+}

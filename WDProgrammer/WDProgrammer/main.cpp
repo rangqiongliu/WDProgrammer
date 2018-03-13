@@ -35,11 +35,23 @@ void main()
 	//int a[] = {1,2,3,4,5,6,7,8,9,10,15,16};
 	//cout << Binary_Search(a, sizeof(a) / sizeof(int), 8) << endl;
 	//
-	Trie a;
-	cout<<a.repeatNum("ana", "anananananana")<<endl;
-
+	//Trie a;
+	//cout<<a.repeatNum("ana", "anananananana")<<endl;
 	//测试压缩多余空格函数
 	//char *p = " liuzhenfang    liurangqiong hanwangxin            dengyang ";
 	//compressSpace(p);
 	
+	//generateBigData(1, 10000, 0.1,"data.txt");
+	//以下是对海量数据中寻找topK函数的测试。为了有对比，只设置了10000个数据，验证了利用小顶堆寻找topK的正确性
+	ifstream in("data.txt");
+	int *data = new int[10000];
+	for (int i = 0; !in.eof(); i++)
+		in >> data[i];
+	QuickSort(data, 0, 9999);
+	for (int i = 19; i >=0; i--)
+	{
+		cout << data[9999-i] << "  ";
+	}
+	cout << endl;
+	TopK_Heap("data.txt", 20);
 }
