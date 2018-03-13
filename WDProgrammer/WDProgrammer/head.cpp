@@ -874,7 +874,7 @@ void TopK_Heap(string file_name, const int k)
 	unsigned long long Avai_Memory = statex.ullAvailPhys;
 	int Threhold = Avai_Memory*0.1 / sizeof(int);
 	//
-
+	Threhold = 10001;
 	int count = 0;
 	int *temp_data = new int[Threhold];
 	while (!in.eof())
@@ -884,7 +884,10 @@ void TopK_Heap(string file_name, const int k)
 			in >> temp_data[count++];
 		}
 
-		count = min(Threhold, count);
+		if (in.eof() && count <= Threhold )//去掉文件最后一个换行符的计数
+		{
+			count = count - 1;
+		}
 		for (int i = 0; i < count; i++)
 		{
 			if (result[0] < temp_data[i])
@@ -894,6 +897,7 @@ void TopK_Heap(string file_name, const int k)
 					creatSmallHeap(result, j, k);
 			}
 		}
+		count = 0;
 	}
 	delete[] temp_data;
 	in.close();
