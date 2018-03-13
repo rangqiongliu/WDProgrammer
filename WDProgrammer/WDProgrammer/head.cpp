@@ -874,7 +874,6 @@ void TopK_Heap(string file_name, const int k)
 	unsigned long long Avai_Memory = statex.ullAvailPhys;
 	int Threhold = Avai_Memory*0.1 / sizeof(int);
 	//
-	Threhold = 10001;
 	int count = 0;
 	int *temp_data = new int[Threhold];
 	while (!in.eof())
