@@ -1,6 +1,8 @@
 #include"head.h"
 #include<iostream>
 #include<typeinfo>
+#include<map>
+//#include<hash_map>
 using namespace std;
 
 void main()
@@ -41,9 +43,11 @@ void main()
 	//char *p = " liuzhenfang    liurangqiong hanwangxin            dengyang ";
 	//compressSpace(p);
 	
-	//generateBigData(1, 10000, 0.1,"data.txt");
+	//generateBigData(2, 10000, 0.1,"string.txt");
+
 	//以下是对海量数据中寻找topK函数的测试。为了有对比，只设置了10000个数据，验证了利用小顶堆寻找topK的正确性
-	ifstream in("data.txt");
+	
+	/*ifstream in("data.txt");
 	int *data = new int[10000];
 	for (int i = 0; !in.eof(); i++)
 		in >> data[i];
@@ -53,5 +57,8 @@ void main()
 		cout << data[9999-i] << "  ";
 	}
 	cout << endl;
-	TopK_Heap("data.txt", 20);
+	TopK_Heap("data.txt", 20);*/
+	//测试：寻找字符串中出现频率最高的K个字符串。
+	//StringTopK_map("string.txt", 10);
+
 }
