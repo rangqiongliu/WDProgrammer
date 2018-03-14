@@ -59,6 +59,8 @@ void main()
 	cout << endl;
 	TopK_Heap("data.txt", 20);*/
 	//测试：寻找字符串中出现频率最高的K个字符串。
-	//StringTopK_map("string.txt", 10);
+	StringTopK_map("string.txt", 10);
+
+
 
 }
