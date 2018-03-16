@@ -21,9 +21,15 @@
     <ClCompile Include="head.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="BiTree.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="head.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="BiTree.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

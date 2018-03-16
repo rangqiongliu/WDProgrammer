@@ -2,6 +2,7 @@
 #pragma once
 #define INF 99999999
 
+
 #include<iostream>
 #include<typeinfo>
 #include<bitset>
@@ -20,7 +21,7 @@ using namespace std;
 时间：2018-2-12
 参考：《王道程序员》第10.2.1节
 */
-int LCS_LENTH(const char *ptr1, const char *ptr2);
+int LCS_LENTH(const char *ptr1, const char *ptr2) ;
 
 /*
 函数功能说明：获取一维数组的最大和最小值
@@ -488,6 +489,7 @@ struct Trie_Node
 class Trie
 {
 public: 
+	
 	Trie() { root = new Trie_Node(); }
 	~Trie() { delete root; }
 	//构建前缀树
@@ -562,3 +564,58 @@ void TopK_Heap(string file_name, const int k);
 由于读取文件的时候是读入到string类型的对象中，每个字符串放入hash_map时也会占用较大时间。因此在读取字符串和将字符串放入hash_map占用该函数95%的运行时间。
 */
 void StringTopK_map(string file_name, const int k);
+
+
+class Graph
+{
+public:
+	
+	Graph(const int n);
+	virtual ~Graph();
+public:
+	void setEdge(int * weight);
+	void dijstra(int start, int *distance, int *path);
+	void Prim() ;// TO DO
+	void Floyd();//TO DO
+	void Kruskal();//TO DO
+private:
+	vector<int> *m_edge;
+	int num_vertex;
+};
+
+class C {
+public:
+	C()
+	{
+		cout << "C" << endl;
+	}
+};
+class A
+{
+public:
+	A()
+	{
+		cout << "A" << endl;
+	}
+	~A()
+	{
+		cout << "~A" << endl;
+	}
+};
+
+
+class B :public C, public A
+{
+
+public:
+	B()
+	{
+		cout << "B" << endl;
+	}
+
+	~B()
+	{
+		cout << "B" << endl;
+	}
+};
+
