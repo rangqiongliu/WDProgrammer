@@ -147,12 +147,20 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BiTree.cpp" />
+    <ClCompile Include="Graph.cpp" />
     <ClCompile Include="head.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Search.cpp" />
+    <ClCompile Include="Sort.cpp" />
+    <ClCompile Include="Trie.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BiTree.h" />
+    <ClInclude Include="Graph.h" />
     <ClInclude Include="head.h" />
+    <ClInclude Include="Search.h" />
+    <ClInclude Include="Sort.h" />
+    <ClInclude Include="Trie.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

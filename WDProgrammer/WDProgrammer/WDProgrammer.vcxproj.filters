@@ -24,12 +24,36 @@
     <ClCompile Include="BiTree.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Sort.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Trie.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Search.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Graph.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="head.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="BiTree.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Sort.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Trie.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Search.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Graph.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

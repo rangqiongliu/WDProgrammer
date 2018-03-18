@@ -1,4 +1,9 @@
 #include"head.h"
+#include"BiTree.h"
+#include"Graph.h"
+#include"Search.h"
+#include"Sort.h"
+#include"Trie.h"
 #include<iostream>
 #include<typeinfo>
 #include<map>
@@ -65,5 +70,6 @@ void main()
 	//StringTopK_map("string.txt", 10);
 	//Graph a(5);
 	// cout << a.hadis << endl;
-	B b;
+	string a = "liurangqiong";
+	cout << a.substr(0,5) << endl;
 }
