@@ -195,7 +195,8 @@ void PrintArray(T *RawData, const int row, const int col)
 */
 void compressSpace(char *myChar);
 
-
-
+/*函数功能：网易春招实习笔试题，第三题。大致要求如下：	 给定一个3*3矩阵A（1-9）；其中每一个子矩阵（2*2）作为一个整体可以进行90 180 270度旋转，再给定一个3*3的目标矩阵B；	 求A->B至少需要旋转多少次函数出口：最后的处理结果直接打印在屏幕上
+日期：2018-03-12
+作者：刘让琼*/int RotaryCube();
 
 

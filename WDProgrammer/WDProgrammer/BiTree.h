@@ -64,23 +64,50 @@ public:
 	函数出口：直接将数据打印在屏幕上
 	*/
 	void Mid_Order_TravelCycle(BinaryTreeNode *root);
+
 	/*
-	
+	函数6：
+	函数功能：利用递归的方法后序遍历以root为节点的二叉树
+	函数入口：需要遍历的二叉树的根节点
+	函数出口：直接将数据打印在屏幕上
 	*/
 	void Post_Order_TravelRecursive(BinaryTreeNode * root);
+
 	/*
-	
+	函数7：/////TO DO
+	函数功能：利用循环的方法后序遍历以root为节点的二叉树
+	函数入口：需要遍历的二叉树的根节点
+	函数出口：直接将数据打印在屏幕上
+	*/
+	void Post_Order_TravelCycle(BinaryTreeNode * root);
+
+	/*
+	函数8：
+	函数功能：将value插入root的左子节点
+	函数入口：root：需要插入的父节点，value：需要插入的数据
+	函数出口：将最终插入成功的左子节点地址返回
 	*/
 	BinaryTreeNode *Insert2LeftNode(BinaryTreeNode *root, DataType value);
+
 	/*
-	
+	函数9：
+	函数功能：将value插入root的右子节点
+	函数入口：root：需要插入的父节点，value：需要插入的数据
+	函数出口：将最终插入成功的右子节点地址返回
 	*/
 	BinaryTreeNode *Insert2RightNode(BinaryTreeNode *root, DataType value);
+
 	/*
-	
+	函数10：
+	函数功能：将root及其子树都销毁掉
+	函数入口：需要销毁树的根节点
+	函数出口：如果成功销毁则返回true，否则false
 	*/
 	bool Destroy(BinaryTreeNode *root);
+
+
 private:
+
 	BinaryTreeNode *m_root;
 };
 

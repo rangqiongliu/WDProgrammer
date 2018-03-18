@@ -38,7 +38,8 @@ bool BinaryTree::Destroy(BinaryTreeNode *root)
 	if (NULL == root) return true;
 	Destroy(root->m_leftChild);
 	Destroy(root->m_rightChild);
-	delete root;
+	delete root;//delete一个指针时，只会释放掉该指针所指向的内存，本身并未被释放掉。因此必须再使该指针指向NULL,以防成为野指针
+	root = NULL;
 	return true;
 }
 
