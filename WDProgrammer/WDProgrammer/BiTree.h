@@ -128,7 +128,24 @@ public:
 	*/
 	BinaryTreeNode * lowestCommonAncestor(BinaryTreeNode* root, BinaryTreeNode* p, BinaryTreeNode * q);
 
-	void Route(BinaryTreeNode* sour, BinaryTreeNode* des, BinaryTreeNode * &resList);
+	void Route(BinaryTreeNode* sour, BinaryTreeNode* des, vector<BinaryTreeNode *> &resList);
+
+	/*
+	函数13：
+	函数功能：计算一颗二叉树的深度（只有一个节点的深度为1）
+	函数入口：要计算的二叉树高度的根节点：root
+	函数出口：将root的二叉树深度返回
+	*/
+	int getTreeDepth(BinaryTreeNode *root);
+
+	/*
+	函数14：
+	函数功能：计算一个颗二叉树中两个节点最远距离
+	函数入口：需要计算的二叉树根节点：root
+	函数出口：函数返回root中两个节点的最远距离
+	说明：计算一颗二叉树中两个节点的最远距离，其实就是求root左子树的深度和右子树深度之和。
+	*/
+	int getMaxDis(BinaryTreeNode * root);
 private:
 
 	BinaryTreeNode *m_root;

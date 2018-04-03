@@ -221,9 +221,70 @@ void  BinaryTree::Search(BinaryTreeNode* root, DataType value, vector<BinaryTree
 	}
 }
 
-void BinaryTree::Route(BinaryTreeNode* sour, BinaryTreeNode* des, BinaryTreeNode * &resList)
+void BinaryTree::Route(BinaryTreeNode* sour, BinaryTreeNode* des, vector<BinaryTreeNode *> &resList)
 {
-	    
+	if (sour == NULL || des == NULL)
+	{
+		resList.clear();
+		return;
+	}
+	BinaryTreeNode * root = lowestCommonAncestor(this->getRoot(), sour, des);
+	BinaryTreeNode * movePointer = root;
+	stack<BinaryTreeNode *> myStack;
+	stack<BinaryTreeNode *> resStack;
+	int flag = 0;
+	root == des ? flag++ : NULL;
+	root == sour ? flag++ : NULL;//这里不能与上一个if合并，因为可能存在sour == root == des的情况
+	if (flag == 2)//如果sour == root == des
+	{
+		resList.push_back(root);
+		return;
+	}
+
+	myStack.push(movePointer);
+
+	while (flag !=2 )
+	{
+		if (movePointer->m_leftChild != NULL || movePointer->m_rightChild != NULL)
+		{
+			resStack.push(movePointer);
+			movePointer->m_rightChild == NULL ? NULL : myStack.push(movePointer->m_rightChild);
+			movePointer->m_leftChild == NULL ? NULL : myStack.push(movePointer->m_leftChild);
+			movePointer = myStack.top();
+		}
+		else
+		{
+			myStack.pop();
+			while(myStack.top()==resStack.top())
+			{
+				myStack.pop();
+				resStack.pop();
+			}
+			movePointer = myStack.top();
+		}
+		if (movePointer == des || movePointer == sour)
+		{
+			flag += 1;
+
+			resList.push_back(movePointer);
+			myStack.pop();
+			if (!myStack.empty())
+			{
+				while (myStack.top() == resStack.top())
+				{
+					resList.push_back(resStack.top());
+					myStack.pop();
+					resStack.pop();
+				}
+			}
+			myStack.empty() ? NULL : movePointer = myStack.top();
+		}
+		
+	}
+	if (resList[0] == des)
+	{
+		reverse(resList.begin(), resList.end());
+	}
 }
 
 BinaryTreeNode * BinaryTree::lowestCommonAncestor(BinaryTreeNode* root, BinaryTreeNode* p, BinaryTreeNode * q)
@@ -239,3 +300,22 @@ BinaryTreeNode * BinaryTree::lowestCommonAncestor(BinaryTreeNode* root, BinaryTr
 	return left == NULL ? right : left;
 }
 
+int BinaryTree::getTreeDepth(BinaryTreeNode *root)
+{
+	if (NULL == root) return 0;
+
+	int left = getTreeDepth(root->m_leftChild);
+	int right = getTreeDepth(root->m_rightChild);
+
+	return left > right ? left + 1 : right + 1;
+}
+
+int BinaryTree::getMaxDis(BinaryTreeNode * root)
+{
+	if (root == NULL) return 0;
+	
+	int left = getTreeDepth(root->m_leftChild);
+	int right = getTreeDepth(root->m_rightChild);
+
+	return left + right;
+}
