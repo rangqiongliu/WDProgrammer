@@ -3,11 +3,14 @@
 
 */
 #include<iostream>
+#include<stack>
+#include<string>
+#include<vector>
 using namespace std;
 #ifndef BITREE_H
 #define BITREE_H
 
-typedef int DataType;
+typedef string DataType;
 struct BinaryTreeNode
 {
 	DataType data;
@@ -15,7 +18,7 @@ struct BinaryTreeNode
 	BinaryTreeNode *m_rightChild;
 	BinaryTreeNode()
 	{
-		data = -1;
+		data = '\0';
 		m_leftChild = NULL;
 		m_rightChild = NULL;
 	}
@@ -25,12 +28,16 @@ class BinaryTree
 {
 public:
 	BinaryTree() { m_root = NULL; }
+	BinaryTreeNode * getRoot()
+	{
+		return m_root;
+	}
 	/*
 	函数1：
 	函数功能：初始化一个二叉树的根节点
 	函数入口：由对象调用，如果形参为空，则默认将根节点看做二叉树的头结点，如果不为空，则跟节点不为空
 	*/
-	void Initial(DataType value = -1);
+	void Initial(DataType value = '\0');
 
 	/*
 	函数2：
@@ -105,10 +112,27 @@ public:
 	*/
 	bool Destroy(BinaryTreeNode *root);
 
+	/*
+	函数11：
+	函数功能：在root二叉树中通过先序遍历搜索value值，如果有value值，则输出所在节点的地址，如果无，则返回空
+	函数入口：root为需要搜寻的树，value需要查找的值,
+	函数出口：res为结果带回的出口，把所有拥有value的节点地址都返回
+	*/
+	void Search(BinaryTreeNode* root, DataType value, vector<BinaryTreeNode*> &res);
 
+	/*
+	函数12：
+	函数功能：在root二叉树中，寻找节点p、节点q的最小公共祖先
+	函数入口：需要寻找树的根节点，需要寻找的两个节点
+	函数出口：将最小公共祖先的地址返回
+	*/
+	BinaryTreeNode * lowestCommonAncestor(BinaryTreeNode* root, BinaryTreeNode* p, BinaryTreeNode * q);
+
+	void Route(BinaryTreeNode* sour, BinaryTreeNode* des, BinaryTreeNode * &resList);
 private:
 
 	BinaryTreeNode *m_root;
+
 };
 
 

@@ -13,6 +13,7 @@
 #include<fstream>
 #include<Windows.h>
 #include<hash_map>
+#include<thread>
 using namespace std;
 
 /*
@@ -68,7 +69,7 @@ void BubbleSort(int *RawData, const int num_elem);
 快速排序是一种不稳定的排序算法，即排完序后相同的两个元素之间的相对位置会发生变化。
 */
 void QuickSort(int *RawData, const int start, const int end);
-void QuickSort(vector<int> &myVector, const int start, const int end);
+void QuickSortVec(vector<int> &myVector, const int start, const int end);
 /*
 函数功能说明：插入排序
 函数入口：需要排序的一维数组，以及数组的元素个数

@@ -66,7 +66,7 @@ void generateBigData(const int kind, const int num, float percent, string file_n
 			data[temp_count++] = rand() % 1000000001;//生成0-100000000范围内的数据
 			if (total_count % 10000 == 0)
 			{
-				cout << "已经生成" << total_count << "个数据" << endl;
+				cout << "已经生成" << total_count << "个整型数据" << endl;
 			}
 		}
 		ot.close();
@@ -93,6 +93,8 @@ void generateBigData(const int kind, const int num, float percent, string file_n
 				data[temp_count] += char('a' + rand() % ('z' + 1 - 'a'));
 			}
 			temp_count++;
+			if (total_count % 10000 == 0)
+				cout << "已经完成" << total_count << "条字符数据的生成" << endl;
 		}
 		ot.clear();
 		delete[] data;
@@ -122,6 +124,8 @@ void generateBigData(const int kind, const int num, float percent, string file_n
 				}
 			}
 			temp_count++;
+			if (total_count % 10000 == 0)
+				cout << "已经完成" << total_count << "条IP数据的生成" << endl;
 		}
 		ot.close();
 		delete[] data;

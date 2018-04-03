@@ -150,6 +150,7 @@
     <ClCompile Include="Graph.cpp" />
     <ClCompile Include="head.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MultiThread.cpp" />
     <ClCompile Include="Search.cpp" />
     <ClCompile Include="Sort.cpp" />
     <ClCompile Include="Trie.cpp" />
@@ -158,6 +159,7 @@
     <ClInclude Include="BiTree.h" />
     <ClInclude Include="Graph.h" />
     <ClInclude Include="head.h" />
+    <ClInclude Include="MultiThread.h" />
     <ClInclude Include="Search.h" />
     <ClInclude Include="Sort.h" />
     <ClInclude Include="Trie.h" />

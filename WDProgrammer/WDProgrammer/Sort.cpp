@@ -53,10 +53,13 @@ void QuickSort(int *RawData, const int start, const int end)
 		}
 	}
 	RawData[former] = key;
-	QuickSort(RawData, start, former - 1);
-	QuickSort(RawData, former + 1, end);
+
+	thread t1(QuickSort,RawData,start,former-1);
+	t1.detach();
+	thread t2( QuickSort, RawData, former + 1, end);
+	t2.detach();
 }
-void QuickSort(vector<int> &myVector, const int start, const int end)
+void QuickSortVec(vector<int> &myVector, const int start, const int end)
 {
 	if (myVector.size() == 0 || start<0 || start >= end) return;
 	int key = myVector[start];
@@ -88,8 +91,11 @@ void QuickSort(vector<int> &myVector, const int start, const int end)
 		}
 	}
 	myVector[former] = key;
-	QuickSort(myVector, start, former - 1);
-	QuickSort(myVector, former + 1, end);
+	
+	thread t1(QuickSortVec,myVector, start, former - 1);
+	t1.detach();
+	thread t2(QuickSortVec,myVector, former + 1, end);
+	t2.detach();
 }
 
 void InsertSort(int *RawData, const int ele_num)
@@ -278,7 +284,7 @@ void BucketSort(vector<int> &myVector)
 	{
 		if (SortVector[i].size() > 1)
 		{
-			QuickSort(SortVector[i], 0, SortVector[i].size() - 1);
+			QuickSortVec(SortVector[i], 0, SortVector[i].size() - 1);
 		}
 	}
 
