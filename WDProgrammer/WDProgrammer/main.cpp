@@ -120,9 +120,7 @@ int main()
 		}
 		cout << countPointNumOnLine(myVector) << endl;
 	}*/
-
-	 
-
-	
+calWeek("20180407");
+return 0;
 
 }

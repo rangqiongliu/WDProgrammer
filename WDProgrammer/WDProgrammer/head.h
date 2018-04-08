@@ -8,6 +8,7 @@
 	函数6：打印一维或者二维（重载）数组
 */
 #define _SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS 
+#define _CRT_SECURE_NO_WARNINGS
 #pragma once
 #define INF 99999999
 #include<iostream>
@@ -16,6 +17,7 @@
 #include<memory>
 #include<math.h>
 #include<map>
+#include<ctime>
 using namespace std;
 /*
 函数1：
@@ -217,6 +219,15 @@ int RotaryCube();
 */
 void  RotateMatrix();
 
+/*
+函数功能呢：计算一个日期是星期几
+函数入口：一个string型字符串，格式为20180408
+函数出口：0~6中的一个数，其中0代表星期天，1代表星期一，以此类推
+日期：2018-04-08
+作者：刘让琼
+*/
+int calWeek(string str="123");
+
 struct Point2D
 {
 	double x;
@@ -226,3 +237,7 @@ struct Point2D
 };
 
 int countPointNumOnLine(vector<Point2D>myVector);
+
+void sing();
+
+void mission();

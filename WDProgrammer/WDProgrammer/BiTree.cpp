@@ -309,7 +309,7 @@ int BinaryTree::getTreeDepth(BinaryTreeNode *root)
 
 	return left > right ? left + 1 : right + 1;
 }
-
+    
 int BinaryTree::getMaxDis(BinaryTreeNode * root)
 {
 	if (root == NULL) return 0;

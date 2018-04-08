@@ -313,6 +313,35 @@ int RotaryCube()
 
 }
 
+int calWeek(string str)
+{
+	int a = 0;
+	time_t timep = time(NULL);
+	struct tm *p;
+	p = localtime(&timep);
+	if (str.size() == 8)
+	{
+		p->tm_year =atoi( (str.substr(0, 4)).c_str())-1990;
+		p->tm_mon = atoi(str.substr(4, 2).c_str()) - 1;
+		p->tm_mday = atoi(str.substr(6, 2).c_str()) ;
+	}
+	//说明：此处运用蔡勒公式
+	//strum tm结构体中，year是从1900年开始的，所以2018年的时候,p->tm_year是118
+	//mon是从0开始的，因此4月的时候，p->tm_mon是3
+	int week = ((p->tm_year+1900) % 100 + int(((p->tm_year+1900) % 100) / 4) + int(((p->tm_year + 1900) / 100) / 4) - 2 * ((p->tm_year+1900) / 100) + int(26 * ((p->tm_mon+1) + 1) / 10) + p->tm_mday - 1)%7;
+	switch (week)
+	{
+	case 0:cout << "Sunday" << endl; break;
+	case 1:cout << "Monday" << endl; break;
+	case 2:cout << "Tuesday" << endl; break;
+	case 3:cout << "Wednesday" << endl; break;
+	case 4:cout << "Thursday" << endl; break;
+	case 5:cout << "Friday" << endl; break;
+	case 6:cout << "Saturday" << endl; break;
+	}
+	return week;
+}
+
 void  RotateMatrix()
 {
 	
@@ -445,4 +474,126 @@ int countPointNumOnLine(vector<Point2D>myVector)
 		iter++;
 	}
 	return max_count;
+}
+
+long  Factorial(const int n)
+{
+	long sum = 1;
+	for (int i = 1; i <= n; i++)
+		sum*= i;
+	return sum;
+}
+
+long  Choose(const int n, const int m)
+{
+	return Factorial(n) / (Factorial(m)*Factorial(n - m));
+}
+
+void sing()
+{
+	int K, A, B, X, Y;
+	while (cin >> K >> A >> B >> X >> Y)
+	{
+		long sum = 0;
+		map<int, int> myMap;
+		for (int i = 0; i < X; i++)
+		{
+			for (int j = 0; j < Y; j++)
+			{
+				if (i*A + j*B == K)
+				{
+					myMap.insert(make_pair (i, j));
+				}
+			}
+		}
+		map<int, int >::iterator iter = myMap.begin();
+		for (; iter != myMap.end(); iter++)
+		{
+			sum += Choose(X, iter->first)*Choose(Y, iter->second);
+			if (sum >= 1000000007)
+				sum %= 1000000007;
+		}
+		cout << sum << endl;
+
+	}
+}
+
+int findIndex(vector<vector<int>> data, int mission_num, bool *flag)
+{
+	int index = -1;
+	int sum = 0;
+	for (int i = 0; i < mission_num; i++)
+	{
+		if (!flag[i])
+		{
+			int tempSum = 200 * data[i][0] + 3 * data[i][1];
+			if (sum < tempSum)
+			{
+				index = i;
+				sum = tempSum;
+			}
+				
+		}
+	}
+	return index;
+}
+
+bool isEmpty(bool *flag, int mission_num)
+{
+	for (int i = 0; i < mission_num; i++)
+	{
+		if (!flag[i])
+			return false;
+	}
+
+	return true;
+}
+
+void mission()
+{
+	int machine_num = 0;
+	int mission_num = 0;
+	while(cin>>machine_num>>mission_num)
+	{
+		vector<vector<int>> machine;
+		vector<vector<int>> mission;
+		vector<int> temp = {0,0};
+		bool *flag = new bool[mission_num] {false};
+		bool *machineFlag = new bool[machine_num] {false};
+		for (int i = 0; i < machine_num; i++)
+		{
+			cin >> temp[0] >> temp[1];
+			machine.push_back(temp);
+		}
+		for (int i = 0; i < mission_num; i++)
+		{
+			cin >> temp[0] >> temp[1];
+			mission.push_back(temp);
+		}
+		int index = -1;
+		long sum = 0;
+		int count = 0;
+		while (!isEmpty(machineFlag, machine_num))
+		{
+			index = findIndex(mission, mission_num, flag);
+			
+			if (index == -1 && isEmpty(flag, mission_num))
+				break;
+			flag[index] = true;
+			for (int j = 0; j < machine_num; j++)
+			{
+				if (!machineFlag[j])
+				{
+					if (machine[j][0] >= mission[index][0] && machine[j][1] >= mission[index][1])
+					{
+						machineFlag[j] = true;
+						sum += 200 * mission[index][0] + 3 * mission[index][1];
+						count++;
+						break;
+					}
+				}
+			}
+		}
+		cout << count << " " << sum << endl;
+	}
 }
